@@ -13,13 +13,15 @@ builder.Services.AddControllers()
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationDbContext>(options => {
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
     options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection"));
     options.LogTo(Console.WriteLine, LogLevel.Information);
     options.UseLazyLoadingProxies();
 });
 builder.Services.AddScoped<IPostsRepository, PostsRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>(); //added by me
 // Scoped, Singleton, Transient
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
